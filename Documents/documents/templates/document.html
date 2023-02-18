@@ -1,0 +1,50 @@
+{% extends 'flatpages/default.html' %}
+{% block title %}
+Документы
+{% endblock title %}
+<link href="{% url 'static/css/styles1.css' %}" rel="stylesheet" />
+{% block content %}
+
+<table class="table-deitail">
+    <thead>
+       <tr>
+           <th scope="col1">Название</th>
+           <th scope="col1">Тип документа</th>
+           <th scope="col1">№ документа</th>
+           <th scope="col1">Дата документа</th>
+             
+       </tr>
+    </thead>
+    <tbody>
+       <tr>
+        <th scope="row1">{{ document.title }}</th>  
+        <th scope="row1">{{ document.category }}</th>
+        <th scope="row1">{{ document.number }}</th>
+        <th scope="row1">{{ document.dateCreate|date:'d M Y'}}</th>
+       </tr>
+    </tbody> 
+</table>
+<hr>
+            <h3 class="fw-bold">Описание</h3>
+            <p class="text-break">{{ document.textDocument }}</p>
+            <h3 class="fw-bold">Сканы документов</h3>
+    {% for image in document.images.all %}
+    
+        <img src="{{ image.file.url }}" class="scale" overflow="hidden"  width="400px" height="400px" border="3"></img>
+       
+       
+    {% endfor %}
+    
+      <br>
+      <br>
+    
+    <div class="mx-auto">
+        <a href="{% url '_edit' document.id %}" class="btn-outline" role="button" >Редактировать документ</a>
+        <p></p>
+        <a href="{% url 'doc_delete' document.id %}" class="btn-secondary" role="button">Удалить документ</a>
+        <p>    </p>
+        
+    </div> 
+    <p></p>
+    <p></p> 
+{% endblock content %}

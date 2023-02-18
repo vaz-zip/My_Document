@@ -1,0 +1,58 @@
+{% extends 'flatpages/default.html' %}
+
+
+<!-- Название у нас будет Product -->
+{% block title %}
+Удаление документа
+{% endblock title %}
+{% block content %}
+<p></p>
+<h4 class="delete-doc">User: {{ request.user.username }} Ваш ID={{ request.user.id }}, Вы удаляете документ</h4>
+<hr>
+<table class="table-delete">
+    <thead>
+       <tr>
+           <th scope="col">Название</th>
+           <th scope="col">Описание</th>
+           <th scope="col">Тип документа</th>
+           <th scope="col">№ документа</th>
+           <th scope="col">Дата документа</th>
+             
+       </tr>
+    </thead>
+    
+   
+    <tr>
+            
+        <th scope="row">{{ document.title }}</th>  
+        <th scope="row"><div>{{ document.textDocument|truncatechars:12 }}</div></th>
+        <th scope="row">{{ document.category }}</th>
+        <th scope="row">{{ document.number }}</th>
+        <th scope="row">{{ document.dateCreate|date:'d M Y'}}</th>
+        
+    </tr>
+    
+ </tbody>
+</table>
+<hr>
+<body>
+    <p></p>
+    
+    {% for image in document.images.all %}
+
+       <img src="{{ image.file.url }}"class="img-delete" width="400px" height="400px" border="1"></img>
+
+    {% endfor %}
+    
+    
+        <form method="POST">
+            <br>
+            {% csrf_token %}
+            <input type="submit" class="mx-auto-delete" value="Подтвердить удаление">
+            <br>
+        </form>
+    
+    
+</body>
+
+{% endblock content %}
