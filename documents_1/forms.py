@@ -1,11 +1,10 @@
 from django import forms
 from .models import Document
 
+from django.contrib.auth.models import User
 
-# from .models import Document
 
-
-class DocumentsForm(forms.ModelForm):
+class DocumentCreateForm(forms.ModelForm):
     images = forms.ImageField(label='Фото документа', widget=forms.ClearableFileInput(attrs={'multiple': True, "class":"mybottom"}))
 
     class Meta:
@@ -13,16 +12,10 @@ class DocumentsForm(forms.ModelForm):
         widgets = {
             'dateCreate': forms.DateInput(attrs={'type': 'date'}),
         }
-        # {
-        #     'author': request.user.username
-        # }
-
-        fields = ['author', 'title', 'category', 'textDocument', 'number', 'dateCreate', 'images']
+        fields = ['title', 'category', 'textDocument', 'number', 'dateCreate', 'images']
 
 
 class DocumentForm(forms.ModelForm):
-    # images = forms.ImageField(label='Фото', widget=forms.ClearableFileInput(attrs={'multiple': True}))
-
     class Meta:
         model = Document
         widgets = {

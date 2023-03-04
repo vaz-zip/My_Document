@@ -59,7 +59,7 @@ MIDDLEWARE = [
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 ]
 
-ROOT_URLCONF = 'documents.urls'
+ROOT_URLCONF = 'project.urls'
 
 TEMPLATES = [
     {
@@ -78,7 +78,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'documents.wsgi.application'
+WSGI_APPLICATION = 'project.wsgi.application'
 LOGIN_URL = 'sign/login/'
 LOGIN_REDIRECT_URL = '/'
 # Database
