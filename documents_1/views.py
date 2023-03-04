@@ -8,7 +8,7 @@ from django.views.generic import ListView, DetailView, DeleteView, CreateView, U
 from .models import Document, Image
 from .filters import DocFilter
 from .models import *
-from .forms import DocumentsForm, DocumentForm
+from .forms import DocumentCreateForm, DocumentForm
 
 
 class DocumentList(LoginRequiredMixin, ListView):
@@ -18,22 +18,14 @@ class DocumentList(LoginRequiredMixin, ListView):
     queryset = Document.objects.all()
     paginate_by = 4
 
-
-    # paginate_by = 3
-
     def get_queryset(self):
         return super().get_queryset().filter(author_id=self.request.user.id)
-
-    # def get_queryset(self):
-    #     return self.get_filter().qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['time_now'] = datetime.now()
         context['list_in_page'] = self.paginate_by
-        # context['docs'] = documents.
         context['filter'] = DocFilter(self.request.GET, queryset=self.get_queryset())  # фильтр поиска
-        # context['form'] = DocForm
         return context
 
 
@@ -51,7 +43,6 @@ class DocumentDeleteView(LoginRequiredMixin, DeleteView):
     model = Document
     template_name = 'doc_delete.html'
     context_object_name = 'document'
-    # queryset = Document.objects.all()
     success_url = '/documents/'
 
 
@@ -62,7 +53,7 @@ def doc_filter(request):
 
 class DocumentCreateView(LoginRequiredMixin, CreateView):
     template_name = '_add.html'
-    form_class = DocumentsForm
+    form_class = DocumentCreateForm
 
     def get_success_url(self) -> str:
         return '/documents/'
@@ -73,7 +64,7 @@ class DocumentCreateView(LoginRequiredMixin, CreateView):
         files = request.FILES.getlist('images')
         if form.is_valid():
             form.cleaned_data.pop('images')
-            document = Document.objects.create(**form.cleaned_data)
+            document = Document.objects.create(**(form.cleaned_data | {'author': request.user}))
             Image.objects.bulk_create(
                 [Image(file=file, document=document) for file in files]
             )
