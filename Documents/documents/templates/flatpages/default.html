@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Мои документы</title>
+        <title>Твои документы</title>
         {% load static %}
 
         <link href="{% static 'css/styles1.css' %}" rel="stylesheet" />
@@ -13,9 +13,9 @@
 <body>
     <header>
         <div class="frame">
-            <h5 class="headspan">
+            <!-- <h5 class="headspan">
                 {{ time_now |date:'d E Y' }} г.
-            </h5>
+            </h5> -->
             <!-- <div class="author_1"><h5>User: {{ request.user.username }}, ID={{ request.user.id }}</h5>
             </div> -->
             <div class="container">
@@ -37,14 +37,12 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/sign/logout/">Выйти</a>
                         </li>
-<!--                        <li>-->
-
-<!--                        </li>-->
                     </ul>
                     
                 </div>
             </div>
         </div>
+        
     </header>
     <div class="frame_1">
         <div class="row">
