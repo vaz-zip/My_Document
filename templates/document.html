@@ -34,7 +34,17 @@
 
 <div class="foto">    
        {% for image in document.images.all %}
-        <img src="{{ image.file.url }}" class="scale" overflow="hidden"  width="300px" height="300px"></img> 
+        <form action="{% url 'delete-image' image.id %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" label="Удалить">
+        <form>
+        <img 
+            src="{{ image.file.url }}"
+            class="scale"
+            overflow="hidden"
+            width="300px"
+            height="300px">
+        </img> 
     {% endfor %}
 </div>   
       <br>
