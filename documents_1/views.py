@@ -1,10 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
-from django.urls import reverse
 from datetime import datetime
-from django.core.paginator import Paginator
+from django.urls import reverse
 
-from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView, RedirectView
 from .models import Document, Image
 from .filters import DocFilter
 from .models import *
@@ -17,9 +16,11 @@ class DocumentList(LoginRequiredMixin, ListView):
     context_object_name = 'documents'
     queryset = Document.objects.all()
     paginate_by = 4
+    filter_class = DocFilter
 
     def get_queryset(self):
-        return super().get_queryset().filter(author_id=self.request.user.id)
+        filter = self.filter_class(self.request.GET, super().get_queryset())
+        return filter.qs.filter(author_id=self.request.user.id)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -80,3 +81,13 @@ class DocumentUpdateView(LoginRequiredMixin, UpdateView):
     def get_object(self, **kwargs):
         id = self.kwargs.get('pk')
         return Document.objects.get(pk=id)
+    
+
+class ImageDeleteView(LoginRequiredMixin, RedirectView):
+    def post(self, request, image_id: int, *args, **kwargs):
+        document_id = Image.objects.filter(id=image_id).values('document_id').first()['document_id']
+        Image.objects.filter(id=image_id).delete()
+
+        return redirect(to=reverse('document', kwargs={
+            'pk': document_id,
+        }))
