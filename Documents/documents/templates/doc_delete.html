@@ -1,13 +1,11 @@
 {% extends 'flatpages/default.html' %}
 
-
-<!-- Название у нас будет Product -->
 {% block title %}
 Удаление документа
 {% endblock title %}
 {% block content %}
 <p></p>
-<h4 class="delete-doc">User: {{ request.user.username }} Ваш ID={{ request.user.id }}, Вы удаляете документ</h4>
+<h4 class="delete-doc">{{ request.user.username }}, Вы удаляете документ</h4>
 <hr>
 <table class="table-delete">
     <thead>
@@ -37,20 +35,20 @@
 <hr>
 <body>
     <p></p>
-    
+    <div class="foto1"> 
     {% for image in document.images.all %}
 
-       <img src="{{ image.file.url }}"class="img-delete" width="400px" height="400px" border="1"></img>
+       <img src="{{ image.file.url }}"class="img-delete" width="300px" height="300px"></img>
 
     {% endfor %}
+    </div>
+    <br>
     
-    
-        <form method="POST">
-            <br>
-            {% csrf_token %}
+    <form method="POST">
+             {% csrf_token %}
             <input type="submit" class="mx-auto-delete" value="Подтвердить удаление">
             <br>
-        </form>
+    </form>
     
     
 </body>

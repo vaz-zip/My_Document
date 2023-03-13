@@ -5,21 +5,26 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="" />
         <meta name="author" content="" />
+        
+
         <title>Твои документы</title>
+        
         {% load static %}
 
-        <link href="{% static 'css/styles1.css' %}" rel="stylesheet" />
+        <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+        <link rel="shortcut icon" type="image/png" href="{% static '/favicon.ico' %}"/>
     </head>
 <body>
     <header>
         <div class="frame">
-            <!-- <h5 class="headspan">
-                {{ time_now |date:'d E Y' }} г.
-            </h5> -->
+            
             <!-- <div class="author_1"><h5>User: {{ request.user.username }}, ID={{ request.user.id }}</h5>
             </div> -->
             <div class="container">
-<!--                <a class="navbar-brand" href="/">Ваши документы</a>-->
+                <h5 class="headspan">
+                    {{ time_now |date:'d E Y' }} г.
+                </h5>
+
                 <div class="navbar-collapse">
                     <ul class="navbar-nav">
                         <li class="nav-item-first">
@@ -55,14 +60,12 @@
         <div class="frame-2">
             <div class="footer">
                 <div class="footer-1">+7-9277-25-00-70, telegram</div>
-		        <div class="footer-2">Твои документы 2023</div>
+		        <div class="footer-2">Твои документы {% now "Y" %}</div>
             </div>
             
             <div>
                 <a style="position: relative; left: 2em; top: -5px">Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Shiryaev Konstantin
             </div>
- 
-
         </div>
     </footer>    <!-- Bootstrap core JS-->
 </body>

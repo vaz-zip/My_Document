@@ -1,0 +1,42 @@
+{
+	"folders": {},
+	"connections": {
+		"sqlite_jdbc-185fb58a6cf-576a959b09b4fc1": {
+			"provider": "sqlite",
+			"driver": "sqlite_jdbc",
+			"name": "db.sqlite3",
+			"save-password": true,
+			"configuration": {
+				"database": "/home/konstanin/My_projects/Docs/Documents/documents/db.sqlite3",
+				"url": "jdbc:sqlite:/home/konstanin/My_projects/Docs/Documents/documents/db.sqlite3",
+				"configurationType": "MANUAL",
+				"type": "dev",
+				"auth-model": "native"
+			}
+		},
+		"sqlite_jdbc-18602b3d4f8-2aa1afce79330f61": {
+			"provider": "sqlite",
+			"driver": "sqlite_jdbc",
+			"name": "db.sqlite3 2",
+			"save-password": true,
+			"configuration": {
+				"database": "/home/konstanin/Projects_SF/Graduate_work_SF/My_Silant/db.sqlite3",
+				"url": "jdbc:sqlite:/home/konstanin/Projects_SF/Graduate_work_SF/My_Silant/db.sqlite3",
+				"configurationType": "MANUAL",
+				"type": "dev",
+				"auth-model": "native"
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Разработка",
+			"color": "255,255,255",
+			"description": "База данных для разработки",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false,
+			"auto-close-transactions": false
+		}
+	}
+}

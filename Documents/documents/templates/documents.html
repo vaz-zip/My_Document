@@ -34,7 +34,6 @@
             {% for document in documents %}  <!--in documents filter.qs%} -->
            
            <tr>
-   
                <th scope="row">
                     <a href="{% url 'document' document.id %}" class="link-dark">{{ document.title|truncatechars:12 }}</a>
                </th>  
@@ -42,7 +41,6 @@
                <th scope="row">{{ document.category }}</th>
                <th scope="row">{{ document.number }}</th>
                <th scope="row">{{ document.dateCreate|date:'d M Y'}}</th>
-               
            </tr>
            {% endfor %}
         </tbody>
